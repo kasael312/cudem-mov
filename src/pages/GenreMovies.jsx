@@ -13,21 +13,31 @@ export default function GenreMovies() {
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        setLoading(true);
-        const response = await api.getMoviesByGenre(`${slug}?page=${page}`);
-        setMovies(response.data.data?.items || []);
-        setTotalPages(response.data.data?.params?.pagination?.total_page || 1);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchMovies = async () => {
+    try {
+      setLoading(true);
+      setError(null);
 
-    fetchMovies();
-  }, [slug, page]);
+      const response = await api.getMoviesByGenre(
+        `${slug}?page=${page}`
+      );
+
+      console.log("Movies API response:", response.data);
+
+      const data = response.data;
+
+      setMovies(data.items || []);
+      setTotalPages(data.pagination?.totalPages || 1);
+    } catch (err) {
+      console.error("Fetch movies error:", err);
+      setError(err.message || "Không thể tải danh sách phim");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchMovies();
+}, [slug, page]);
 
   if (loading)
     return (

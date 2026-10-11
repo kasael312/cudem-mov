@@ -17,8 +17,9 @@ export default function CountryMovies() {
       try {
         setLoading(true);
         const response = await api.getMoviesByCountry(`${slug}?page=${page}`);
-        setMovies(response.data.data?.items || []);
-        setTotalPages(response.data.data?.params?.pagination?.total_page || 1);
+        console.log(response);
+        setMovies(response.data.items || []);
+        setTotalPages(response.data.pagination?.total_page || 1);
       } catch (err) {
         setError(err.message);
       } finally {

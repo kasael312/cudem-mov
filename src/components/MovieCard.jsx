@@ -3,9 +3,16 @@ import { IMAGE_URL } from "../services/api";
 import "../styles/MovieCard.css";
 
 export default function MovieCard({ movie, isHorizontal = false }) {
-  const imageUrl = movie.thumb_url?.startsWith("http")
+  const imageUrl =
+  typeof movie.thumb_url === "string" &&
+  movie.thumb_url.startsWith("http")
     ? movie.thumb_url
-    : `${IMAGE_URL}${movie.thumb_url}`;
+    : typeof movie.thumb_url === "string" && movie.thumb_url
+      ? `${IMAGE_URL}${movie.thumb_url}`
+      : typeof movie.poster_url === "string" &&
+          movie.poster_url.startsWith("http")
+        ? movie.poster_url
+        : "/images/no-poster.png";
 
   return (
     <Link
