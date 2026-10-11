@@ -28,7 +28,7 @@ function App() {
           </Routes>
         </main>
         <footer className="footer">
-          <p>© 2025 Ophim. All rights reserved.</p>
+          <p>© 2025 Boxmovie All rights reserved.</p>
         </footer>
       </div>
     </Router>
