@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import MovieDetail from "./pages/MovieDetail";
@@ -30,6 +31,7 @@ function App() {
         <footer className="footer">
           <p>© 2025 Boxmovie All rights reserved.</p>
         </footer>
+        <Analytics />
       </div>
     </Router>
   );
